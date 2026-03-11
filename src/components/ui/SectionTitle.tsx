@@ -27,7 +27,7 @@ export default function SectionTitle({
     <div
       ref={ref}
       className={cn(
-        'mb-12 md:mb-16',
+        'mb-8 sm:mb-12 md:mb-16',
         align === 'center' && 'text-center',
         className
       )}
@@ -37,11 +37,11 @@ export default function SectionTitle({
           {tag}
         </span>
       )}
-      <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+      <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mx-auto mt-4 max-w-2xl font-body text-lg text-muted md:text-xl">
+        <p className="mx-auto mt-3 max-w-2xl font-body text-base text-muted sm:mt-4 sm:text-lg md:text-xl">
           {subtitle}
         </p>
       )}

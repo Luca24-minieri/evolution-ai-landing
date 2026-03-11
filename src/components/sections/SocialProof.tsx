@@ -42,7 +42,7 @@ function MarqueeRow({
 
       <div
         className={cn(
-          'flex w-max items-center gap-10 py-4 md:gap-14',
+          'flex w-max items-center gap-6 py-4 sm:gap-10 md:gap-14',
           reverse ? 'animate-marquee-reverse' : 'animate-marquee'
         )}
       >
@@ -54,7 +54,7 @@ function MarqueeRow({
             <div className="h-1.5 w-1.5 rounded-full bg-primary-500/30 transition-colors duration-500 group-hover:bg-primary-400" />
             <span
               className={cn(
-                'whitespace-nowrap font-heading text-lg text-white/20 transition-all duration-500 group-hover:text-white/50 md:text-xl',
+                'whitespace-nowrap font-heading text-base text-white/20 transition-all duration-500 group-hover:text-white/50 sm:text-lg md:text-xl',
                 company.style
               )}
             >

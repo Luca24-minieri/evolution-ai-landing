@@ -101,7 +101,7 @@ export default function Services() {
         {/* Bento Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-3 md:gap-5 lg:gap-6"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 md:gap-5 lg:gap-6"
         >
           {services.map((service, i) => {
             const Icon = service.icon
@@ -109,8 +109,8 @@ export default function Services() {
             // Bento layout: first 2 cards span 2 cols, rest are 1 col each
             const isLarge = i < 2
             const gridClass = isLarge
-              ? 'md:col-span-2 md:row-span-1'
-              : 'md:col-span-2 lg:col-span-1'
+              ? 'sm:col-span-2 md:col-span-2 md:row-span-1'
+              : 'sm:col-span-1 md:col-span-2 lg:col-span-1'
 
             // Rearrange on lg: first 2 take full width row, 4 below in 2x2
             const lgClass = isLarge

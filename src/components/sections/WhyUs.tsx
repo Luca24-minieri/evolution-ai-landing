@@ -71,7 +71,7 @@ export default function WhyUs() {
       className="section-padding relative overflow-hidden"
     >
       {/* Background texture */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -84,7 +84,7 @@ export default function WhyUs() {
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-primary-700/[0.06] blur-[100px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionTitle
           tag="Ventajas"
           title="¿Por qué Evolution.AI?"
@@ -92,7 +92,7 @@ export default function WhyUs() {
         />
 
         {/* Asymmetric grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6">
+        <div className="mt-10 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -101,7 +101,7 @@ export default function WhyUs() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               className={cn(
-                'lg:col-span-6',
+                'sm:col-span-1 lg:col-span-6',
                 // Asymmetric sizing: first and third cards are larger
                 i === 0 && 'lg:col-span-7',
                 i === 1 && 'lg:col-span-5',
@@ -111,7 +111,7 @@ export default function WhyUs() {
             >
               <GlowCard
                 className={cn(
-                  'p-8 sm:p-10 h-full flex flex-col justify-between min-h-[220px]',
+                  'p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between min-h-[180px] sm:min-h-[220px]',
                   stat.accent && 'border-primary-500/10'
                 )}
               >
@@ -119,7 +119,7 @@ export default function WhyUs() {
                 <div>
                   <div className="flex items-baseline gap-3 mb-2">
                     {stat.symbol ? (
-                      <span className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold gradient-text leading-none">
+                      <span className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none">
                         {stat.symbol}
                       </span>
                     ) : (
@@ -128,7 +128,7 @@ export default function WhyUs() {
                         prefix={stat.prefix}
                         suffix={stat.suffix}
                         duration={2200}
-                        className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold gradient-text leading-none"
+                        className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none"
                       />
                     )}
                   </div>

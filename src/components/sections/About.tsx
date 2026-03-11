@@ -54,13 +54,13 @@ export default function About() {
       className="section-padding relative overflow-hidden"
     >
       {/* Decorative geometric elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 right-10 w-64 h-64 border border-primary-500/[0.06] rounded-full" />
-        <div className="absolute top-32 right-22 w-40 h-40 border border-primary-500/[0.04] rounded-full" />
-        <div className="absolute bottom-20 left-10 w-32 h-32 border border-primary-500/[0.05] rotate-45" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 right-10 w-64 h-64 border border-primary-500/[0.06] rounded-full hidden sm:block" />
+        <div className="absolute top-32 right-22 w-40 h-40 border border-primary-500/[0.04] rounded-full hidden sm:block" />
+        <div className="absolute bottom-20 left-10 w-32 h-32 border border-primary-500/[0.05] rotate-45 hidden sm:block" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionTitle
           tag="Nosotros"
           title="Somos Evolution.AI"
@@ -112,7 +112,7 @@ export default function About() {
         </motion.div>
 
         {/* Values grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {VALUES.map((value, i) => (
             <motion.div
               key={value.name}
@@ -121,14 +121,14 @@ export default function About() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
             >
-              <GlowCard className="p-7 sm:p-8 text-center h-full group">
-                <div className="w-14 h-14 mx-auto mb-5 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-primary-500/20">
-                  <value.icon className="w-7 h-7 text-primary-400" strokeWidth={1.5} />
+              <GlowCard className="p-5 sm:p-7 lg:p-8 text-center h-full group">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-5 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-primary-500/20">
+                  <value.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary-400" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
+                <h3 className="text-lg sm:text-xl font-heading font-semibold text-foreground mb-1 sm:mb-2">
                   {value.name}
                 </h3>
-                <p className="text-muted-light text-base leading-relaxed">
+                <p className="text-muted-light text-sm sm:text-base leading-relaxed">
                   {value.description}
                 </p>
               </GlowCard>

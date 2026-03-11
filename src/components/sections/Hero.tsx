@@ -271,7 +271,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-20 text-center lg:px-8">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 pt-24 pb-16 text-center sm:px-6 sm:pb-20 lg:px-8">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -286,7 +286,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="font-heading text-[2rem] font-extrabold leading-[1.1] tracking-tight xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
           {headlineWords.map((word, i) => (
             <motion.span
               key={word}
@@ -323,7 +323,7 @@ export default function Hero() {
             duration: 0.7,
             ease: smoothEase,
           }}
-          className="mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed text-muted-light md:text-xl"
+          className="mx-auto mt-6 max-w-2xl font-body text-base leading-relaxed text-muted-light sm:mt-8 sm:text-lg md:text-xl"
         >
           Automatización, desarrollo de software e inteligencia artificial
           para empresas que quieren liderar el futuro.
@@ -340,12 +340,12 @@ export default function Hero() {
             stiffness: 200,
             damping: 20,
           }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4"
         >
-          <Button variant="primary" size="lg" href="/contacto">
+          <Button variant="primary" size="lg" href="/contacto" className="w-full sm:w-auto">
             Comienza tu evolución
           </Button>
-          <Button variant="secondary" size="lg" href="/servicios">
+          <Button variant="secondary" size="lg" href="/servicios" className="w-full sm:w-auto">
             Ver servicios
           </Button>
         </motion.div>
@@ -355,7 +355,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3, duration: 1 }}
-          className="mt-16 flex flex-col items-center gap-2"
+          className="mt-10 flex flex-col items-center gap-2 sm:mt-16"
         >
           <span className="font-body text-xs tracking-widest text-muted uppercase">
             Scroll

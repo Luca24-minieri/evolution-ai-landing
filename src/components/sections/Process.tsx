@@ -196,7 +196,7 @@ export default function Process() {
                     className={cn(
                       'process-step',
                       // Mobile: always offset from left line
-                      'ml-14 md:ml-0',
+                      'ml-12 sm:ml-14 md:ml-0',
                       // Desktop: alternating sides
                       'md:grid md:grid-cols-2 md:gap-12'
                     )}
@@ -248,13 +248,13 @@ function StepCard({
   return (
     <div
       className={cn(
-        'group relative max-w-md rounded-2xl border border-white/5 bg-surface p-6 md:p-8',
+        'group relative max-w-md rounded-2xl border border-white/5 bg-surface p-5 sm:p-6 md:p-8',
         'transition-all duration-300 hover:border-primary-500/20 hover:bg-surface-light',
         align === 'right' ? 'md:text-right' : 'md:text-left'
       )}
     >
       {/* Big number */}
-      <span className="process-number absolute -top-4 font-heading text-6xl font-extrabold leading-none text-primary-500/10 md:text-7xl select-none">
+      <span className="process-number absolute -top-3 sm:-top-4 font-heading text-5xl font-extrabold leading-none text-primary-500/10 md:text-7xl select-none">
         {step.number}
       </span>
 

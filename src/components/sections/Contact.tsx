@@ -82,19 +82,19 @@ export default function Contact() {
       className="section-padding relative overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-primary-500/[0.03] blur-[120px]" />
         <div className="absolute top-20 left-0 w-[300px] h-[300px] rounded-full bg-primary-700/[0.05] blur-[80px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionTitle
           tag="Contacto"
           title="Comienza tu evolución hoy"
           subtitle="Cuéntanos sobre tu proyecto"
         />
 
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Left: Form */}
           <motion.div
             variants={slideFromLeft}
@@ -193,7 +193,7 @@ export default function Contact() {
                       </p>
                       <p
                         className={cn(
-                          'text-lg text-foreground transition-colors duration-300',
+                          'text-base sm:text-lg text-foreground transition-colors duration-300 break-all sm:break-normal',
                           info.href && 'group-hover:text-primary-400'
                         )}
                       >

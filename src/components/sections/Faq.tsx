@@ -132,14 +132,14 @@ export default function Faq() {
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary-500/[0.03] blur-[100px]" />
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionTitle
           tag="FAQ"
           title="Preguntas Frecuentes"
           subtitle="Todo lo que necesitas saber antes de dar el siguiente paso"
         />
 
-        <div className="mt-14">
+        <div className="mt-8 sm:mt-14">
           {/* Top border */}
           <div className="h-px bg-white/[0.06]" />
 

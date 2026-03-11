@@ -115,7 +115,7 @@ function AuroraCanvas() {
 export default function CtaBanner() {
   return (
     <section className="relative overflow-hidden section-padding">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-3xl border border-white/[0.06] bg-surface">
           {/* Aurora Borealis background */}
           <AuroraCanvas />
@@ -134,14 +134,14 @@ export default function CtaBanner() {
           />
 
           {/* Content */}
-          <div className="relative z-10 px-8 py-16 text-center md:px-16 md:py-24">
+          <div className="relative z-10 px-5 py-12 text-center sm:px-8 sm:py-16 md:px-16 md:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.97 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <h2 className="shimmer-text font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              <h2 className="shimmer-text font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
                 ¿Listo para{' '}
                 <span className="gradient-text">evolucionar</span>
                 {' '}tu negocio?

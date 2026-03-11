@@ -46,7 +46,7 @@ export default function Navbar() {
           : 'bg-transparent py-5'
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2 transition-opacity duration-300 hover:opacity-80">
           <Image
@@ -108,7 +108,7 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="overflow-hidden border-t border-white/5 glass lg:hidden"
           >
-            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-6">
+            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-6 sm:px-6">
               {NAV_LINKS.map((link, i) => {
                 const isActive = pathname === link.href
                 return (
