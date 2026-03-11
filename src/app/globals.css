@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════════════
+   Evolution.AI — Design Tokens (Tailwind v4)
+   ═══════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Typography ── */
+  --font-heading: var(--font-syne);
+  --font-body: var(--font-dm-sans);
+
+  /* ── Colors: Primary (Aqua/Cyan) ── */
+  --color-primary-50: #e0fbff;
+  --color-primary-100: #b3f5ff;
+  --color-primary-200: #80eeff;
+  --color-primary-300: #4de7ff;
+  --color-primary-400: #1ae0ff;
+  --color-primary-500: #00e5ff;
+  --color-primary-600: #00b8cc;
+  --color-primary-700: #008a99;
+  --color-primary-800: #005c66;
+  --color-primary-900: #002e33;
+
+  /* ── Colors: Background & Surface ── */
+  --color-background: #0a0a0f;
+  --color-surface: #111118;
+  --color-surface-light: #1a1a24;
+  --color-surface-lighter: #24243a;
+
+  /* ── Colors: Text ── */
+  --color-foreground: #ffffff;
+  --color-muted: #8a8a9a;
+  --color-muted-light: #b0b0c0;
+
+  /* ── Colors: Accent & Glow ── */
+  --color-accent: #00e5ff;
+  --color-accent-glow: #00e5ff40;
+  --color-accent-soft: #00e5ff15;
+
+  /* ── Colors: WhatsApp ── */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1ebe57;
+
+  /* ── Colors: Semantic ── */
+  --color-success: #00e676;
+  --color-warning: #ffab00;
+  --color-error: #ff1744;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Custom Utilities
+   ═══════════════════════════════════════════════════════ */
+
+/* Glow effect for primary elements */
+.glow-primary {
+  box-shadow:
+    0 0 20px var(--color-accent-glow),
+    0 0 60px var(--color-accent-glow),
+    inset 0 0 20px var(--color-accent-glow);
+}
+
+.glow-primary-sm {
+  box-shadow:
+    0 0 10px var(--color-accent-glow),
+    0 0 30px var(--color-accent-glow);
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow:
+    0 0 10px var(--color-accent-glow),
+    0 0 40px var(--color-accent-glow);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-300), var(--color-primary-500), var(--color-primary-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(17, 17, 24, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-lighter);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-primary-500);
+  color: var(--color-background);
 }

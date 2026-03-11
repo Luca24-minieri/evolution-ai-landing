@@ -1,0 +1,232 @@
+'use client'
+
+import { useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { MessageCircle } from 'lucide-react'
+import Button from '@/components/ui/Button'
+
+/* ═══════════════════════════════════════════════════════
+   Aurora Borealis Canvas Background
+   ═══════════════════════════════════════════════════════ */
+
+function AuroraCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const rafRef = useRef<number>(0)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let w = 0
+    let h = 0
+
+    function resize() {
+      w = canvas!.clientWidth
+      h = canvas!.clientHeight
+      const dpr = Math.min(window.devicePixelRatio, 2)
+      canvas!.width = w * dpr
+      canvas!.height = h * dpr
+      ctx!.scale(dpr, dpr)
+    }
+
+    resize()
+    window.addEventListener('resize', resize)
+
+    // Aurora bands configuration
+    const bands = [
+      { yOffset: 0.2, amplitude: 0.12, frequency: 0.8, speed: 0.3, color: [0, 229, 255], opacity: 0.07 },
+      { yOffset: 0.35, amplitude: 0.15, frequency: 1.2, speed: 0.4, color: [0, 184, 204], opacity: 0.05 },
+      { yOffset: 0.5, amplitude: 0.1, frequency: 0.6, speed: 0.25, color: [77, 231, 255], opacity: 0.06 },
+      { yOffset: 0.65, amplitude: 0.18, frequency: 1.0, speed: 0.35, color: [0, 229, 255], opacity: 0.04 },
+    ]
+
+    function draw() {
+      ctx!.clearRect(0, 0, w, h)
+      const t = performance.now() * 0.001
+
+      for (const band of bands) {
+        const bandY = h * band.yOffset
+        const grad = ctx!.createLinearGradient(0, bandY - h * 0.2, 0, bandY + h * 0.3)
+        const [r, g, b] = band.color
+        const pulse = (Math.sin(t * band.speed * 0.5) * 0.5 + 0.5) * 0.4 + 0.6
+
+        grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0)`)
+        grad.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, ${band.opacity * pulse})`)
+        grad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${band.opacity * pulse * 1.5})`)
+        grad.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, ${band.opacity * pulse * 0.8})`)
+        grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
+
+        ctx!.beginPath()
+        ctx!.moveTo(-10, h)
+
+        // Draw wavy aurora shape
+        for (let x = -10; x <= w + 10; x += 4) {
+          const wave1 = Math.sin(x * 0.003 * band.frequency + t * band.speed) * h * band.amplitude
+          const wave2 = Math.sin(x * 0.005 * band.frequency + t * band.speed * 1.3) * h * band.amplitude * 0.5
+          const wave3 = Math.sin(x * 0.001 + t * 0.2) * h * 0.05
+          const y = bandY + wave1 + wave2 + wave3
+          ctx!.lineTo(x, y)
+        }
+
+        ctx!.lineTo(w + 10, h)
+        ctx!.closePath()
+        ctx!.fillStyle = grad
+        ctx!.fill()
+      }
+
+      // Central glow orb
+      const orbPulse = Math.sin(t * 0.4) * 0.02 + 0.06
+      const orbGrad = ctx!.createRadialGradient(
+        w * 0.5, h * 0.4, 0,
+        w * 0.5, h * 0.4, w * 0.45
+      )
+      orbGrad.addColorStop(0, `rgba(0, 229, 255, ${orbPulse})`)
+      orbGrad.addColorStop(0.5, `rgba(0, 229, 255, ${orbPulse * 0.4})`)
+      orbGrad.addColorStop(1, 'rgba(0, 229, 255, 0)')
+      ctx!.fillStyle = orbGrad
+      ctx!.fillRect(0, 0, w, h)
+
+      rafRef.current = requestAnimationFrame(draw)
+    }
+
+    rafRef.current = requestAnimationFrame(draw)
+
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+    />
+  )
+}
+
+/* ═══════════════════════════════════════════════════════
+   CTA Banner Section
+   ═══════════════════════════════════════════════════════ */
+
+export default function CtaBanner() {
+  return (
+    <section className="relative overflow-hidden section-padding">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.06] bg-surface">
+          {/* Aurora Borealis background */}
+          <AuroraCanvas />
+
+          {/* Noise overlay */}
+          <div className="noise absolute inset-0" aria-hidden="true" />
+
+          {/* Glow line top */}
+          <div
+            className="absolute top-0 left-1/2 h-px w-1/2 -translate-x-1/2"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent)',
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Content */}
+          <div className="relative z-10 px-8 py-16 text-center md:px-16 md:py-24">
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              <h2 className="shimmer-text font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                ¿Listo para{' '}
+                <span className="gradient-text">evolucionar</span>
+                {' '}tu negocio?
+              </h2>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+              className="mx-auto mt-5 max-w-xl font-body text-lg text-muted-light md:text-xl"
+            >
+              Conversemos sobre cómo la IA puede transformar tu empresa
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.5,
+                type: 'spring',
+                stiffness: 200,
+                damping: 20,
+              }}
+              className="mt-10"
+            >
+              <Button
+                variant="whatsapp"
+                size="lg"
+                href="https://wa.me/56975231022"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle size={20} />
+                Hablemos por WhatsApp
+              </Button>
+            </motion.div>
+
+            {/* Trust micro-copy */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-6 font-body text-xs text-muted"
+            >
+              Sin compromiso · Respuesta en menos de 24hs
+            </motion.p>
+          </div>
+        </div>
+      </div>
+
+      {/* Shimmer effect on title */}
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+          background: linear-gradient(
+            90deg,
+            rgba(255,255,255,1) 0%,
+            rgba(255,255,255,1) 40%,
+            rgba(0,229,255,0.8) 50%,
+            rgba(255,255,255,1) 60%,
+            rgba(255,255,255,1) 100%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shimmer 4s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .shimmer-text {
+            animation: none;
+            background: none;
+            -webkit-text-fill-color: unset;
+            color: white;
+          }
+        }
+      `}</style>
+    </section>
+  )
+}
