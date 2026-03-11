@@ -26,9 +26,9 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="Evolution.AI"
-                width={160}
-                height={46}
-                className="h-11 w-auto"
+                width={200}
+                height={56}
+                className="h-14 w-auto"
               />
             </Link>
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-muted">
