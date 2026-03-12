@@ -106,20 +106,23 @@ export default function Process() {
         />
 
         <div ref={sectionRef} className="relative mt-8 md:mt-16">
-          {/* Horizontal connector line — desktop only, behind cards */}
-          <div className="absolute top-[3.5rem] left-[12.5%] right-[12.5%] hidden lg:block" style={{ zIndex: -1 }}>
+          {/* Grid with line inside same stacking context */}
+          <div className="relative isolate grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6">
+            {/* Horizontal connector line — inside grid, behind everything */}
             <div
-              ref={lineRef}
-              className="h-[2px] w-full origin-left bg-gradient-to-r from-primary-500/60 via-primary-400/40 to-primary-500/20"
-            />
-          </div>
+              className="pointer-events-none absolute top-[3.5rem] left-[12.5%] right-[12.5%] hidden lg:block"
+              style={{ zIndex: 0 }}
+            >
+              <div
+                ref={lineRef}
+                className="h-[2px] w-full origin-left bg-gradient-to-r from-primary-500/60 via-primary-400/40 to-primary-500/20"
+              />
+            </div>
 
-          {/* Steps grid — 4 columns on desktop, above the line */}
-          <div className="relative grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6">
             {steps.map((step, i) => {
               const Icon = step.icon
               return (
-                <div key={i} className="process-card relative" style={{ zIndex: 2 }}>
+                <div key={i} className="process-card relative" style={{ zIndex: 1 }}>
                   {/* Step card */}
                   <div className="group relative rounded-2xl border border-white/5 bg-surface p-6 transition-all duration-300 hover:border-primary-500/20 hover:bg-surface-light">
                     {/* Number badge */}
