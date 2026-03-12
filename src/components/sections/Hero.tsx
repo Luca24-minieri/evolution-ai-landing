@@ -215,7 +215,7 @@ const wordVariants = {
     y: 0,
     filter: 'blur(0px)',
     transition: {
-      delay: 1.0 + i * 0.12,
+      delay: 0.4 + i * 0.12,
       duration: 0.6,
       ease: smoothEase,
     },
@@ -230,7 +230,7 @@ const accentWordVariants = {
     filter: 'blur(0px)',
     scale: 1,
     transition: {
-      delay: 1.0 + (headlineWords.length + i) * 0.12 + 0.15,
+      delay: 0.4 + (headlineWords.length + i) * 0.12 + 0.15,
       duration: 0.8,
       ease: smoothEase,
     },
@@ -272,19 +272,6 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-5xl px-4 pt-24 pb-16 text-center sm:px-6 sm:pb-20 lg:px-8">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.6, ease: smoothEase }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary-500/25 bg-primary-500/5 px-5 py-2 glow-primary-sm"
-        >
-          <span aria-hidden="true">🚀</span>
-          <span className="font-body text-sm font-medium tracking-wide text-primary-300">
-            Agencia de IA &amp; Desarrollo
-          </span>
-        </motion.div>
-
         {/* Headline */}
         <h1 className="font-heading text-[1.75rem] font-extrabold leading-[1.1] tracking-tight min-[400px]:text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl">
           {headlineWords.map((word, i) => (
@@ -319,7 +306,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            delay: 1.8,
+            delay: 1.2,
             duration: 0.7,
             ease: smoothEase,
           }}
@@ -334,7 +321,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            delay: 2.2,
+            delay: 1.6,
             duration: 0.6,
             type: 'spring',
             stiffness: 200,
@@ -354,7 +341,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3, duration: 1 }}
+          transition={{ delay: 2.2, duration: 1 }}
           className="mt-10 flex flex-col items-center gap-2 sm:mt-16"
         >
           <span className="font-body text-xs tracking-widest text-muted uppercase">

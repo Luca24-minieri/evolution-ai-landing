@@ -22,14 +22,19 @@ export default function Footer() {
         <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-block transition-opacity duration-300 hover:opacity-80">
-              <Image
-                src="/logo.png"
-                alt="Evolution.AI"
-                width={200}
-                height={56}
-                className="h-14 w-auto"
-              />
+            <Link href="/" className="inline-flex items-center gap-3 transition-opacity duration-300 hover:opacity-80">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl">
+                <Image
+                  src="/logo.png"
+                  alt="Evolution.AI"
+                  width={200}
+                  height={200}
+                  className="h-10 w-auto object-cover object-top"
+                />
+              </div>
+              <span className="font-heading text-lg font-bold text-foreground">
+                Evolution<span className="text-primary-400">.AI</span>
+              </span>
             </Link>
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-muted">
               Transformamos negocios con inteligencia artificial. Tu evolución digital comienza aquí.

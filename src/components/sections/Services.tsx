@@ -24,39 +24,49 @@ const services = [
     icon: Zap,
     title: 'Automatización con IA',
     description:
-      'Tu equipo pierde horas en tareas que una máquina hace en segundos. Desarrollamos sistemas propios que eliminan el trabajo manual de punta a punta: procesamiento de documentos, sincronización entre plataformas, reportes automáticos y workflows completos que corren solos. El resultado: operaciones más rápidas, menos errores y un equipo libre para enfocarse en lo estratégico.',
+      'Eliminamos el trabajo manual con sistemas que procesan documentos, sincronizan plataformas y ejecutan workflows completos sin intervención humana.',
   },
   {
     icon: MessageSquare,
     title: 'Agentes de IA & Chatbots',
     description:
-      'Un asistente que conoce tu negocio como el mejor vendedor de tu equipo, pero disponible 24/7. Nuestros agentes atienden clientes, califican leads, gestionan agendas, procesan pedidos y escalan situaciones complejas a personas reales cuando es necesario. Respuestas precisas basadas en tu información real, con personalidad alineada a tu marca y memoria de cada conversación.',
+      'Asistentes 24/7 que atienden clientes, califican leads y gestionan agendas con la personalidad de tu marca.',
   },
   {
     icon: Code2,
     title: 'Desarrollo de Software',
     description:
-      'Cuando las soluciones genéricas no alcanzan, construimos la tuya. Software a medida diseñado desde cero para resolver los problemas específicos de tu operación: sistemas internos, plataformas de gestión, backends robustos y arquitecturas que escalan sin romperse. Código limpio, documentado y preparado para crecer contigo.',
+      'Software a medida: sistemas internos, plataformas de gestión y backends robustos que escalan contigo.',
   },
   {
     icon: Globe,
     title: 'Desarrollo Web & Apps',
     description:
-      'Tu presencia digital es tu mejor vendedor. Creamos plataformas web y aplicaciones que no solo se ven impecables — cargan rápido, posicionan en Google y convierten visitantes en clientes. Dashboards, e-commerce, portales SaaS o landing pages de alto impacto, todo optimizado para que cada visita cuente.',
+      'Plataformas web y apps que cargan rápido, posicionan en Google y convierten visitantes en clientes.',
   },
   {
     icon: LineChart,
     title: 'Consultoría en IA',
     description:
-      'Antes de escribir una línea de código, entendemos tu negocio. Analizamos tus procesos, identificamos dónde la inteligencia artificial genera mayor retorno y diseñamos un plan de implementación claro con prioridades, tiempos y resultados esperados. Cada decisión tecnológica está respaldada por una estrategia con impacto medible.',
+      'Analizamos tus procesos, identificamos oportunidades de IA y diseñamos un plan con impacto medible.',
   },
   {
     icon: Plug,
     title: 'Integración de IA',
     description:
-      'No necesitas reemplazar lo que ya funciona. Potenciamos tus sistemas actuales inyectando inteligencia artificial donde más impacta: búsqueda semántica sobre tus datos, clasificación automática, predicciones y análisis en tiempo real. Todo conectado a tu infraestructura existente, sin fricciones ni migraciones disruptivas.',
+      'Potenciamos tus sistemas actuales con búsqueda semántica, clasificación automática y predicciones en tiempo real. Sin migraciones, sin fricciones.',
   },
 ]
+
+/** Grid placement per card index for the 6-col bento layout */
+const gridSpans: Record<number, string> = {
+  0: 'md:col-span-4 md:row-span-2',
+  1: 'md:col-span-2 md:row-span-1',
+  2: 'md:col-span-2 md:row-span-1',
+  3: 'md:col-span-3 md:row-span-1',
+  4: 'md:col-span-3 md:row-span-1',
+  5: 'md:col-span-6 md:row-span-1',
+}
 
 export default function Services() {
   const gridRef = useRef<HTMLDivElement>(null)
@@ -98,56 +108,79 @@ export default function Services() {
           subtitle="Tecnología a medida para cada desafío de tu negocio"
         />
 
-        {/* Bento Grid */}
+        {/* Bento Grid — 6-col asymmetric */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:grid-rows-3 md:gap-5 lg:gap-6"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-6 md:gap-5 lg:gap-6"
         >
           {services.map((service, i) => {
             const Icon = service.icon
-
-            // Bento layout: first 2 cards span 2 cols, rest are 1 col each
-            const isLarge = i < 2
-            const gridClass = isLarge
-              ? 'sm:col-span-2 md:col-span-2 md:row-span-1'
-              : 'sm:col-span-1 md:col-span-2 lg:col-span-1'
-
-            // Rearrange on lg: first 2 take full width row, 4 below in 2x2
-            const lgClass = isLarge
-              ? 'lg:col-span-2 lg:row-span-2'
-              : ''
+            const isHero = i === 0
+            const isBanner = i === 5
 
             return (
-              <div key={i} className={cn('service-card', gridClass, lgClass)}>
-                <GlowCard className="h-full flex flex-col justify-start">
+              <div
+                key={i}
+                className={cn('service-card', gridSpans[i])}
+              >
+                <GlowCard
+                  className={cn(
+                    'h-full',
+                    isHero
+                      ? 'flex flex-col justify-center bg-gradient-to-br from-primary-500/[0.07] via-surface to-surface'
+                      : 'flex flex-col justify-start',
+                    isBanner
+                      ? 'flex flex-row items-center gap-6 md:flex-row'
+                      : ''
+                  )}
+                >
                   {/* Icon */}
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-500/10 text-primary-400 transition-all duration-300 group-hover:bg-primary-500/20 group-hover:scale-110 group-hover:rotate-6">
-                    <Icon className="h-6 w-6" strokeWidth={1.8} />
+                  <div
+                    className={cn(
+                      'flex items-center justify-center rounded-xl bg-primary-500/10 text-primary-400 transition-all duration-300 group-hover:bg-primary-500/20 group-hover:scale-110 group-hover:rotate-6',
+                      isHero
+                        ? 'mb-5 h-14 w-14'
+                        : isBanner
+                          ? 'mb-0 h-12 w-12 shrink-0'
+                          : 'mb-4 h-12 w-12',
+                    )}
+                  >
+                    <Icon
+                      className={cn(isHero ? 'h-7 w-7' : 'h-6 w-6')}
+                      strokeWidth={1.8}
+                    />
                   </div>
 
-                  {/* Title */}
-                  <h3
-                    className={cn(
-                      'mb-2 font-heading font-bold text-foreground',
-                      isLarge ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'
-                    )}
-                  >
-                    {service.title}
-                  </h3>
+                  {/* Text content */}
+                  <div className={cn(isBanner ? 'flex-1' : '')}>
+                    {/* Title */}
+                    <h3
+                      className={cn(
+                        'mb-2 font-heading font-bold text-foreground',
+                        isHero
+                          ? 'text-xl md:text-2xl lg:text-3xl'
+                          : 'text-lg md:text-xl'
+                      )}
+                    >
+                      {service.title}
+                    </h3>
 
-                  {/* Description */}
-                  <p
-                    className={cn(
-                      'font-body text-muted-light leading-relaxed',
-                      isLarge ? 'text-base md:text-lg' : 'text-sm md:text-base'
-                    )}
-                  >
-                    {service.description}
-                  </p>
+                    {/* Description */}
+                    <p
+                      className={cn(
+                        'font-body text-muted-light leading-relaxed',
+                        isHero
+                          ? 'text-base md:text-lg'
+                          : 'text-sm md:text-base'
+                      )}
+                    >
+                      {service.description}
+                    </p>
+                  </div>
 
-                  {/* Decorative corner glow on large cards */}
-                  {isLarge && (
-                    <div className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-primary-500/5 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-0" />
+                  {/* Decorative corner glow on hero card */}
+                  {isHero && (
+                    <div className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-primary-500/5 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-0" />
                   )}
                 </GlowCard>
               </div>

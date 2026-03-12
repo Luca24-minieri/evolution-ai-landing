@@ -34,12 +34,12 @@ function AuroraCanvas() {
     resize()
     window.addEventListener('resize', resize)
 
-    // Aurora bands configuration
+    // Aurora bands configuration (reduced opacity ~25% for full-bleed)
     const bands = [
-      { yOffset: 0.2, amplitude: 0.12, frequency: 0.8, speed: 0.3, color: [0, 229, 255], opacity: 0.07 },
-      { yOffset: 0.35, amplitude: 0.15, frequency: 1.2, speed: 0.4, color: [0, 184, 204], opacity: 0.05 },
-      { yOffset: 0.5, amplitude: 0.1, frequency: 0.6, speed: 0.25, color: [77, 231, 255], opacity: 0.06 },
-      { yOffset: 0.65, amplitude: 0.18, frequency: 1.0, speed: 0.35, color: [0, 229, 255], opacity: 0.04 },
+      { yOffset: 0.2, amplitude: 0.12, frequency: 0.8, speed: 0.3, color: [0, 229, 255], opacity: 0.05 },
+      { yOffset: 0.35, amplitude: 0.15, frequency: 1.2, speed: 0.4, color: [0, 184, 204], opacity: 0.035 },
+      { yOffset: 0.5, amplitude: 0.1, frequency: 0.6, speed: 0.25, color: [77, 231, 255], opacity: 0.045 },
+      { yOffset: 0.65, amplitude: 0.18, frequency: 1.0, speed: 0.35, color: [0, 229, 255], opacity: 0.03 },
     ]
 
     function draw() {
@@ -76,8 +76,8 @@ function AuroraCanvas() {
         ctx!.fill()
       }
 
-      // Central glow orb
-      const orbPulse = Math.sin(t * 0.4) * 0.02 + 0.06
+      // Central glow orb (reduced intensity)
+      const orbPulse = Math.sin(t * 0.4) * 0.015 + 0.045
       const orbGrad = ctx!.createRadialGradient(
         w * 0.5, h * 0.4, 0,
         w * 0.5, h * 0.4, w * 0.45
@@ -114,87 +114,73 @@ function AuroraCanvas() {
 
 export default function CtaBanner() {
   return (
-    <section className="relative overflow-hidden section-padding">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-white/[0.06] bg-surface">
-          {/* Aurora Borealis background */}
-          <AuroraCanvas />
+    <section className="relative overflow-hidden py-16 md:py-28">
+      {/* Aurora Borealis background */}
+      <AuroraCanvas />
 
-          {/* Noise overlay */}
-          <div className="noise absolute inset-0" aria-hidden="true" />
+      {/* Semi-transparent overlay for text readability */}
+      <div className="absolute inset-0 bg-[#0a0a0f]/30" aria-hidden="true" />
 
-          {/* Glow line top */}
-          <div
-            className="absolute top-0 left-1/2 h-px w-1/2 -translate-x-1/2"
-            style={{
-              background:
-                'linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent)',
-            }}
-            aria-hidden="true"
-          />
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 className="shimmer-text font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
+            ¿Listo para{' '}
+            <span className="gradient-text">evolucionar</span>
+            {' '}tu negocio?
+          </h2>
+        </motion.div>
 
-          {/* Content */}
-          <div className="relative z-10 px-5 py-12 text-center sm:px-8 sm:py-16 md:px-16 md:py-24">
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-            >
-              <h2 className="shimmer-text font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
-                ¿Listo para{' '}
-                <span className="gradient-text">evolucionar</span>
-                {' '}tu negocio?
-              </h2>
-            </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+          className="mx-auto mt-5 max-w-xl font-body text-lg text-muted-light md:text-xl"
+        >
+          Conversemos sobre cómo la IA puede transformar tu empresa
+        </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
-              className="mx-auto mt-5 max-w-xl font-body text-lg text-muted-light md:text-xl"
-            >
-              Conversemos sobre cómo la IA puede transformar tu empresa
-            </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.5,
+            type: 'spring',
+            stiffness: 200,
+            damping: 20,
+          }}
+          className="mt-10"
+        >
+          <Button
+            variant="whatsapp"
+            size="lg"
+            href="https://wa.me/56975231022"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle size={20} />
+            Hablemos por WhatsApp
+          </Button>
+        </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{
-                delay: 0.3,
-                duration: 0.5,
-                type: 'spring',
-                stiffness: 200,
-                damping: 20,
-              }}
-              className="mt-10"
-            >
-              <Button
-                variant="whatsapp"
-                size="lg"
-                href="https://wa.me/56975231022"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle size={20} />
-                Hablemos por WhatsApp
-              </Button>
-            </motion.div>
-
-            {/* Trust micro-copy */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-6 font-body text-xs text-muted"
-            >
-              Sin compromiso · Respuesta en menos de 24hs
-            </motion.p>
-          </div>
-        </div>
+        {/* Trust micro-copy */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-6 font-body text-xs text-muted"
+        >
+          Sin compromiso · Respuesta en menos de 24hs
+        </motion.p>
       </div>
 
       {/* Shimmer effect on title */}

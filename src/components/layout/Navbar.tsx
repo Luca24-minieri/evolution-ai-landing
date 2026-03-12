@@ -6,8 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { NAV_LINKS } from '@/lib/utils'
+import { cn, NAV_LINKS } from '@/lib/utils'
 import Button from '@/components/ui/Button'
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const
@@ -83,29 +82,34 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Floating pill navbar */}
       <header
-        className={cn(
-          'fixed top-0 left-0 z-50 w-full transition-all duration-500',
-          isScrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-white/5 py-3'
-            : 'bg-transparent py-5'
-        )}
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl"
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="group flex items-center gap-2 transition-opacity duration-300 hover:opacity-80">
+        <nav
+          className={cn(
+            'flex items-center justify-between rounded-full px-4 py-2 transition-all duration-500',
+            'bg-[#0a0a0f]/70 backdrop-blur-xl border border-white/10',
+            isScrolled && 'bg-[#0a0a0f]/90 shadow-lg shadow-black/20'
+          )}
+        >
+          {/* Logo — icon only via cropped container */}
+          <Link
+            href="/"
+            className="group relative flex-shrink-0 h-8 w-8 overflow-hidden rounded-full transition-opacity duration-300 hover:opacity-80"
+          >
             <Image
               src="/logo.png"
               alt="Evolution.AI"
               width={200}
               height={56}
-              className="h-10 w-auto sm:h-12 md:h-14"
+              className="h-8 w-auto object-cover object-top"
               priority
             />
           </Link>
 
-          {/* Desktop links */}
-          <ul className="hidden items-center gap-8 lg:flex">
+          {/* Desktop links — centered */}
+          <ul className="hidden items-center gap-5 lg:flex">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href
               return (
@@ -127,7 +131,7 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block flex-shrink-0">
             <Button variant="primary" size="sm" href="/contacto">
               Hablemos
             </Button>
@@ -136,7 +140,7 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-white/5 lg:hidden"
+            className="relative z-[60] flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-white/5 lg:hidden"
             aria-label={isMobileOpen ? 'Cerrar menú' : 'Abrir menú'}
           >
             {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -173,7 +177,7 @@ export default function Navbar() {
               {/* Sidebar header */}
               <div className="flex h-[72px] items-center justify-between px-6 border-b border-white/[0.06]">
                 <span className="font-heading text-sm font-semibold tracking-wider text-muted uppercase">
-                  Menú
+                  Menu
                 </span>
                 <button
                   onClick={() => setIsMobileOpen(false)}
