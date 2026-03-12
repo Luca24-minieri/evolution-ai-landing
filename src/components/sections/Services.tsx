@@ -92,7 +92,7 @@ export default function Services() {
         trigger: el,
         start: 'top 80%',
         end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
+        toggleActions: 'play none none none',
       },
     })
 

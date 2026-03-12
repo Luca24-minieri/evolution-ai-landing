@@ -84,7 +84,7 @@ export default function Process() {
           scrollTrigger: {
             trigger: card,
             start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            toggleActions: 'play none none none',
           },
         }
       )
@@ -109,16 +109,16 @@ export default function Process() {
         />
 
         <div ref={sectionRef} className="relative mt-8 md:mt-16">
-          {/* Horizontal connector line — desktop only */}
-          <div className="absolute top-[3.5rem] left-[12.5%] right-[12.5%] hidden lg:block">
+          {/* Horizontal connector line — desktop only, behind cards */}
+          <div className="absolute top-[3.5rem] left-[12.5%] right-[12.5%] z-0 hidden lg:block">
             <div
               ref={lineRef}
               className="h-[2px] w-full origin-left bg-gradient-to-r from-primary-500/60 via-primary-400/40 to-primary-500/20"
             />
           </div>
 
-          {/* Steps grid — 4 columns on desktop */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6">
+          {/* Steps grid — 4 columns on desktop, above the line */}
+          <div className="relative z-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6">
             {steps.map((step, i) => {
               const Icon = step.icon
               return (
