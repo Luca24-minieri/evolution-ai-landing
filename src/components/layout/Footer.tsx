@@ -102,7 +102,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Evolution.AI — Todos los derechos reservados.
           </p>
           <p className="font-body text-xs text-muted/60">
-            Hecho con IA en Santiago, Chile
+            Hecho con pasión por el equipo de Evolution.AI
           </p>
         </div>
       </div>

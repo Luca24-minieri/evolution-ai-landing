@@ -47,14 +47,13 @@ const STATS: StatBlock[] = [
 ]
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      delay: i * 0.15,
-      duration: 0.7,
+      delay: i * 0.1,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1] as const,
     },
   }),
@@ -85,8 +84,8 @@ export default function WhyUs() {
             backgroundSize: '40px 40px',
           }}
         />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(800px,200vw)] h-[min(800px,200vw)] rounded-full bg-primary-500/[0.04] blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-primary-700/[0.06] blur-[100px]" />
+        <div className="hidden sm:block absolute top-0 left-1/2 -translate-x-1/2 w-[min(800px,200vw)] h-[min(800px,200vw)] rounded-full bg-primary-500/[0.04] blur-[120px]" />
+        <div className="hidden sm:block absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-primary-700/[0.06] blur-[100px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
