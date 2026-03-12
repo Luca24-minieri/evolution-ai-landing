@@ -6,18 +6,22 @@ import { motion } from 'framer-motion'
 /**
  * Timeline Draw — /proceso page entrance
  * A vertical line draws itself from top to bottom,
- * then content fades in sequentially from behind the line.
+ * then fades to a subtle background behind the content.
  */
 
 export default function TimelineDraw({ children }: { children: ReactNode }) {
   return (
     <div className="relative">
-      {/* Animated draw line overlay */}
+      {/* Animated draw line — draws then fades to background */}
       <motion.div
-        className="fixed left-1/2 top-0 z-40 -translate-x-1/2 pointer-events-none"
-        initial={{ height: 0 }}
-        animate={{ height: '100vh' }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed left-1/2 top-0 -translate-x-1/2 pointer-events-none"
+        style={{ zIndex: 0 }}
+        initial={{ height: 0, opacity: 1 }}
+        animate={{ height: '100vh', opacity: 0.15 }}
+        transition={{
+          height: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+          opacity: { delay: 0.9, duration: 0.6 },
+        }}
       >
         <div className="w-[2px] h-full bg-gradient-to-b from-primary-500 via-primary-400 to-transparent" />
 
@@ -32,18 +36,10 @@ export default function TimelineDraw({ children }: { children: ReactNode }) {
         </motion.div>
       </motion.div>
 
-      {/* Fade out the draw line */}
+      {/* Page content — above the line */}
       <motion.div
-        className="fixed left-1/2 top-0 z-40 -translate-x-1/2 pointer-events-none"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ delay: 0.9, duration: 0.4 }}
-      >
-        <div className="w-[2px] h-screen bg-gradient-to-b from-primary-500 via-primary-400 to-transparent" />
-      </motion.div>
-
-      {/* Page content with staggered reveal */}
-      <motion.div
+        className="relative"
+        style={{ zIndex: 1 }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
