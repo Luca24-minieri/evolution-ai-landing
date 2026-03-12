@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, useCallback, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
 /**
  * Grid Materialize — /servicios page entrance
  * Particles converge from random positions into a grid formation,
- * then dissolve to reveal the actual content beneath.
+ * then fade to a subtle background that persists behind the content.
  */
 
 interface Particle {
@@ -18,8 +18,16 @@ interface Particle {
   delay: number
 }
 
-function ParticleCanvas({ onComplete }: { onComplete: () => void }) {
+function ParticleCanvas({ onAssembled }: { onAssembled: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const calledRef = useRef(false)
+
+  const handleAssembled = useCallback(() => {
+    if (!calledRef.current) {
+      calledRef.current = true
+      onAssembled()
+    }
+  }, [onAssembled])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -45,7 +53,6 @@ function ParticleCanvas({ onComplete }: { onComplete: () => void }) {
       for (let col = 0; col < cols; col++) {
         const targetX = (col + 0.5) * (w / cols)
         const targetY = (row + 0.5) * (h / rows)
-        // Diagonal stagger: delay based on distance from top-left
         const diagonalDist = (col / cols + row / rows) / 2
         particles.push({
           x: Math.random() * w,
@@ -59,47 +66,61 @@ function ParticleCanvas({ onComplete }: { onComplete: () => void }) {
     }
 
     const startTime = performance.now()
-    const assembleDuration = 800 // ms to reach grid
-    const holdDuration = 200 // ms holding grid form
-    const totalDuration = assembleDuration + holdDuration
+    const assembleDuration = 800
+    const holdDuration = 400
+    const fadeToBgDuration = 600
+    const totalAnimDuration = assembleDuration + holdDuration + fadeToBgDuration
+
+    // Background settled opacity
+    const bgAlpha = 0.12
 
     let raf: number
+    let notified = false
 
     function draw() {
       const elapsed = performance.now() - startTime
       ctx!.clearRect(0, 0, w, h)
 
-      if (elapsed > totalDuration) {
-        cancelAnimationFrame(raf)
-        onComplete()
-        return
+      // Notify content can appear once grid is assembled
+      if (!notified && elapsed >= assembleDuration) {
+        notified = true
+        handleAssembled()
       }
 
       for (const p of particles) {
         const particleElapsed = Math.max(0, elapsed - p.delay * 1000)
         const progress = Math.min(1, particleElapsed / assembleDuration)
-        // Ease out cubic
         const eased = 1 - Math.pow(1 - progress, 3)
 
         const currentX = p.x + (p.targetX - p.x) * eased
         const currentY = p.y + (p.targetY - p.y) * eased
 
-        // Fade in during assembly, fade out after hold
         let alpha: number
         if (elapsed < assembleDuration) {
+          // Phase 1: assembling — fade in
           alpha = eased * 0.7
+        } else if (elapsed < assembleDuration + holdDuration) {
+          // Phase 2: hold at full
+          alpha = 0.7
+        } else if (elapsed < totalAnimDuration) {
+          // Phase 3: fade down to background level
+          const fadeProgress = (elapsed - assembleDuration - holdDuration) / fadeToBgDuration
+          const easedFade = fadeProgress * fadeProgress // ease-in for smooth settle
+          alpha = 0.7 - (0.7 - bgAlpha) * easedFade
         } else {
-          const fadeProgress = (elapsed - assembleDuration) / holdDuration
-          alpha = 0.7 * (1 - fadeProgress)
+          // Phase 4: settled as background
+          alpha = bgAlpha
         }
 
+        const dotSize = p.size * (0.5 + eased * 0.5)
+
         ctx!.beginPath()
-        ctx!.arc(currentX, currentY, p.size * (0.5 + eased * 0.5), 0, Math.PI * 2)
+        ctx!.arc(currentX, currentY, dotSize, 0, Math.PI * 2)
         ctx!.fillStyle = `rgba(0, 229, 255, ${alpha})`
         ctx!.fill()
 
-        // Connection lines to nearby assembled particles
-        if (progress > 0.6 && alpha > 0.1) {
+        // Connection lines during assembly
+        if (progress > 0.6 && elapsed < assembleDuration + holdDuration && alpha > 0.1) {
           for (const other of particles) {
             if (other === p) continue
             const dx = other.targetX - p.targetX
@@ -109,47 +130,62 @@ function ParticleCanvas({ onComplete }: { onComplete: () => void }) {
               const otherElapsed = Math.max(0, elapsed - other.delay * 1000)
               const otherProgress = Math.min(1, otherElapsed / assembleDuration)
               if (otherProgress > 0.6) {
-                const lineAlpha = alpha * 0.15 * (1 - dist / 80)
-                ctx!.beginPath()
-                ctx!.moveTo(currentX, currentY)
-                const otherX = other.x + (other.targetX - other.x) * (1 - Math.pow(1 - otherProgress, 3))
-                const otherY = other.y + (other.targetY - other.y) * (1 - Math.pow(1 - otherProgress, 3))
-                ctx!.lineTo(otherX, otherY)
-                ctx!.strokeStyle = `rgba(0, 229, 255, ${lineAlpha})`
-                ctx!.lineWidth = 0.5
-                ctx!.stroke()
+                // Fade lines out during hold and beyond
+                let lineFade = 1
+                if (elapsed > assembleDuration) {
+                  lineFade = Math.max(0, 1 - (elapsed - assembleDuration) / holdDuration)
+                }
+                const lineAlpha = alpha * 0.15 * (1 - dist / 80) * lineFade
+                if (lineAlpha > 0.005) {
+                  const otherEased = 1 - Math.pow(1 - otherProgress, 3)
+                  const otherX = other.x + (other.targetX - other.x) * otherEased
+                  const otherY = other.y + (other.targetY - other.y) * otherEased
+                  ctx!.beginPath()
+                  ctx!.moveTo(currentX, currentY)
+                  ctx!.lineTo(otherX, otherY)
+                  ctx!.strokeStyle = `rgba(0, 229, 255, ${lineAlpha})`
+                  ctx!.lineWidth = 0.5
+                  ctx!.stroke()
+                }
               }
             }
           }
         }
       }
 
-      raf = requestAnimationFrame(draw)
+      // After settling, draw static frame less frequently
+      if (elapsed < totalAnimDuration) {
+        raf = requestAnimationFrame(draw)
+      } else {
+        // Draw one last static frame (already drawn above), then stop animation loop
+        // The canvas stays in the DOM with the last painted frame
+      }
     }
 
     raf = requestAnimationFrame(draw)
     return () => cancelAnimationFrame(raf)
-  }, [onComplete])
+  }, [handleAssembled])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 z-0 pointer-events-none"
       aria-hidden="true"
     />
   )
 }
 
 export default function GridMaterialize({ children }: { children: ReactNode }) {
-  const [showCanvas, setShowCanvas] = useState(true)
+  const [assembled, setAssembled] = useState(false)
 
   return (
     <>
-      {showCanvas && <ParticleCanvas onComplete={() => setShowCanvas(false)} />}
+      <ParticleCanvas onAssembled={() => setAssembled(true)} />
       <motion.div
+        className="relative z-10"
         initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.6, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        animate={assembled ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         {children}
       </motion.div>
