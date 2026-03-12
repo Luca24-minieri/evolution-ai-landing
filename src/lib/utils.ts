@@ -14,10 +14,10 @@ export const SITE_CONFIG = {
 } as const
 
 export const NAV_LINKS = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/servicios' },
-  { label: 'Proceso', href: '/proceso' },
-  { label: 'Nosotros', href: '/nosotros' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contacto', href: '/contacto' },
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Proceso', href: '#proceso' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contacto', href: '#contacto' },
 ] as const

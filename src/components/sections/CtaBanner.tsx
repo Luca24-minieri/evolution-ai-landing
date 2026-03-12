@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import { MessageCircle, ArrowDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
 
 /* ═══════════════════════════════════════════════════════
@@ -157,8 +157,16 @@ export default function CtaBanner() {
             stiffness: 200,
             damping: 20,
           }}
-          className="mt-10"
+          className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4"
         >
+          <Button
+            variant="primary"
+            size="lg"
+            href="#contacto"
+          >
+            <ArrowDown size={18} />
+            Agenda una reunión
+          </Button>
           <Button
             variant="whatsapp"
             size="lg"
@@ -166,8 +174,8 @@ export default function CtaBanner() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MessageCircle size={20} />
-            Hablemos por WhatsApp
+            <MessageCircle size={18} />
+            Escríbenos por WhatsApp
           </Button>
         </motion.div>
 
