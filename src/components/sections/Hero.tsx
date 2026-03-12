@@ -332,7 +332,7 @@ export default function Hero() {
           <Button variant="primary" size="lg" href="#contacto" className="w-full sm:w-auto">
             Comienza tu evolución
           </Button>
-          <Button variant="secondary" size="lg" href="/servicios" className="w-full sm:w-auto">
+          <Button variant="secondary" size="lg" href="#servicios" className="w-full sm:w-auto">
             Ver servicios
           </Button>
         </motion.div>

@@ -125,7 +125,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block flex-shrink-0">
-            <Button variant="primary" size="sm" href="/contacto">
+            <Button variant="primary" size="sm" href="#contacto">
               Hablemos
             </Button>
           </div>
@@ -226,7 +226,7 @@ export default function Navbar() {
                 <Button
                   variant="primary"
                   size="md"
-                  href="/contacto"
+                  href="#contacto"
                   className="w-full"
                 >
                   Hablemos
