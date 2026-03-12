@@ -2,12 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { NAV_LINKS } from '@/lib/utils'
 
-const socialLinks = [
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Instagram', href: '#' },
-  { label: 'Twitter', href: '#' },
-]
-
 const serviceLinks = [
   { label: 'Agentes AI', href: '/servicios' },
   { label: 'Automatización', href: '/servicios' },
@@ -19,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-white/5 bg-background">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8">
+        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 transition-opacity duration-300 hover:opacity-80">
@@ -79,24 +73,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="mb-4 font-heading text-sm font-semibold tracking-wider text-foreground uppercase">
-              Síguenos
-            </h4>
-            <ul className="flex flex-col gap-3">
-              {socialLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-muted transition-colors duration-300 hover:text-primary-400"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </div>
 
         {/* Bottom bar */}
