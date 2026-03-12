@@ -53,22 +53,17 @@ export default function Process() {
 
     const tweens: gsap.core.Tween[] = []
 
-    // Animate the horizontal line drawing on scroll
-    const lineTween = gsap.fromTo(
-      line,
-      { scaleX: 0 },
-      {
-        scaleX: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 65%',
-          end: 'bottom 80%',
-          scrub: 0.8,
-        },
-      }
-    )
-    tweens.push(lineTween)
+    // Animate the horizontal line drawing on scroll, then fade to background
+    const lineTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 65%',
+        end: 'bottom 80%',
+        scrub: 0.8,
+      },
+    })
+    lineTl.fromTo(line, { scaleX: 0, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.8 })
+    lineTl.to(line, { opacity: 0.25, duration: 0.2 })
 
     // Animate each card
     const cards = section.querySelectorAll<HTMLElement>('.process-card')
@@ -92,6 +87,8 @@ export default function Process() {
     })
 
     return () => {
+      lineTl.kill()
+      lineTl.scrollTrigger?.kill()
       tweens.forEach((t) => {
         t.kill()
         t.scrollTrigger?.kill()
@@ -122,7 +119,7 @@ export default function Process() {
             {steps.map((step, i) => {
               const Icon = step.icon
               return (
-                <div key={i} className="process-card relative">
+                <div key={i} className="process-card relative" style={{ zIndex: 2 }}>
                   {/* Step card */}
                   <div className="group relative rounded-2xl border border-white/5 bg-surface p-6 transition-all duration-300 hover:border-primary-500/20 hover:bg-surface-light">
                     {/* Number badge */}
