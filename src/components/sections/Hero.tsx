@@ -27,7 +27,7 @@ function NeuralCanvas() {
 
   const initNodes = useCallback((width: number, height: number) => {
     isMobileRef.current = width < 768
-    const count = isMobileRef.current ? 40 : 80
+    const count = isMobileRef.current ? 25 : 80
     const nodes: Node[] = []
 
     for (let i = 0; i < count; i++) {
@@ -286,7 +286,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="font-heading text-[2rem] font-extrabold leading-[1.1] tracking-tight xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="font-heading text-[1.75rem] font-extrabold leading-[1.1] tracking-tight min-[400px]:text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl">
           {headlineWords.map((word, i) => (
             <motion.span
               key={word}

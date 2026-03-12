@@ -99,7 +99,7 @@ export default function Navbar() {
               alt="Evolution.AI"
               width={200}
               height={56}
-              className="h-12 w-auto sm:h-14"
+              className="h-10 w-auto sm:h-12 md:h-14"
               priority
             />
           </Link>

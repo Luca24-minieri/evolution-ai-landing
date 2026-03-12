@@ -17,10 +17,14 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
+    // Disable Lenis on touch devices — iOS Safari handles scroll natively better
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouch) return
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
+      touchMultiplier: 1.5,
       infinite: false,
     })
 

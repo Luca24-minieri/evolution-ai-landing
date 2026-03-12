@@ -73,7 +73,7 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
         >
-          <p className="text-lg sm:text-xl text-muted-light leading-relaxed text-center">
+          <p className="text-base sm:text-lg md:text-xl text-muted-light leading-relaxed text-center">
             Somos una agencia especializada en inteligencia artificial y desarrollo de software
             que nació con una misión clara:{' '}
             <span className="text-foreground font-medium">
@@ -82,7 +82,7 @@ export default function About() {
             Creemos que la IA no es el futuro — es el presente, y cada empresa merece
             aprovechar su potencial al máximo.
           </p>
-          <p className="text-lg sm:text-xl text-muted-light leading-relaxed text-center">
+          <p className="text-base sm:text-lg md:text-xl text-muted-light leading-relaxed text-center">
             Combinamos tecnología de vanguardia con un enfoque profundamente humano.
             No entregamos soluciones genéricas: escuchamos, entendemos tu negocio y
             construimos herramientas que realmente{' '}
@@ -90,7 +90,7 @@ export default function About() {
             Desde automatización inteligente hasta plataformas completas, cada proyecto
             es una oportunidad para redefinir lo posible.
           </p>
-          <p className="text-lg sm:text-xl text-muted-light leading-relaxed text-center">
+          <p className="text-base sm:text-lg md:text-xl text-muted-light leading-relaxed text-center">
             Nuestro compromiso es simple: no paramos hasta que tu empresa evolucione.
             Innovación continua, excelencia en cada línea de código y la convicción de que{' '}
             <span className="text-foreground font-medium">

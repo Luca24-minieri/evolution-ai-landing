@@ -101,7 +101,7 @@ export default function Services() {
         {/* Bento Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 md:gap-5 lg:gap-6"
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:grid-rows-3 md:gap-5 lg:gap-6"
         >
           {services.map((service, i) => {
             const Icon = service.icon

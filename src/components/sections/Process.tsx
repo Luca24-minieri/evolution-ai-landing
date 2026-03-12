@@ -164,7 +164,7 @@ export default function Process() {
           </div>
 
           {/* Mobile vertical line */}
-          <div className="absolute left-6 top-0 h-full md:hidden">
+          <div className="absolute left-4 sm:left-6 top-0 h-full md:hidden">
             <div className="h-full w-[2px] bg-gradient-to-b from-primary-500/80 via-primary-400/50 to-primary-500/10" />
           </div>
 
@@ -185,7 +185,7 @@ export default function Process() {
                   </div>
 
                   {/* Dot on timeline — mobile */}
-                  <div className="process-dot absolute left-6 top-6 z-10 -translate-x-1/2 md:hidden">
+                  <div className="process-dot absolute left-4 sm:left-6 top-6 z-10 -translate-x-1/2 md:hidden">
                     <div className="relative flex h-4 w-4 items-center justify-center">
                       <div className="h-2.5 w-2.5 rounded-full bg-primary-500 shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
                     </div>
@@ -196,7 +196,7 @@ export default function Process() {
                     className={cn(
                       'process-step',
                       // Mobile: always offset from left line
-                      'ml-12 sm:ml-14 md:ml-0',
+                      'ml-10 sm:ml-14 md:ml-0',
                       // Desktop: alternating sides
                       'md:grid md:grid-cols-2 md:gap-12'
                     )}

@@ -193,7 +193,7 @@ export default function Contact() {
                       </p>
                       <p
                         className={cn(
-                          'text-base sm:text-lg text-foreground transition-colors duration-300 break-all sm:break-normal',
+                          'text-sm sm:text-lg text-foreground transition-colors duration-300 break-words',
                           info.href && 'group-hover:text-primary-400'
                         )}
                       >

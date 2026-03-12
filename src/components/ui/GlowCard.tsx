@@ -42,7 +42,7 @@ export default function GlowCard({ children, className }: GlowCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group relative overflow-hidden rounded-2xl border border-white/5 bg-surface p-6 md:p-8',
+        'group relative overflow-hidden rounded-2xl border border-white/5 bg-surface p-5 sm:p-6 md:p-8',
         'transition-transform duration-300 ease-out',
         className
       )}

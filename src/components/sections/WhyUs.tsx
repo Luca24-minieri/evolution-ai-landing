@@ -111,7 +111,7 @@ export default function WhyUs() {
             >
               <GlowCard
                 className={cn(
-                  'p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between min-h-[180px] sm:min-h-[220px]',
+                  'p-5 sm:p-8 lg:p-10 h-full flex flex-col justify-between min-h-[160px] sm:min-h-[220px]',
                   stat.accent && 'border-primary-500/10'
                 )}
               >
@@ -119,7 +119,7 @@ export default function WhyUs() {
                 <div>
                   <div className="flex items-baseline gap-3 mb-2">
                     {stat.symbol ? (
-                      <span className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none">
+                      <span className="text-3xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none">
                         {stat.symbol}
                       </span>
                     ) : (
@@ -128,7 +128,7 @@ export default function WhyUs() {
                         prefix={stat.prefix}
                         suffix={stat.suffix}
                         duration={2200}
-                        className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none"
+                        className="text-3xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none"
                       />
                     )}
                   </div>
