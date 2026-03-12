@@ -1,8 +1,5 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
   Zap,
   MessageSquare,
@@ -14,10 +11,6 @@ import {
 import SectionTitle from '@/components/ui/SectionTitle'
 import GlowCard from '@/components/ui/GlowCard'
 import { cn } from '@/lib/utils'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
 
 const services = [
   {
@@ -72,36 +65,6 @@ const gridSpans: Record<number, string> = {
 }
 
 export default function Services() {
-  const gridRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = gridRef.current
-    if (!el) return
-
-    const cards = el.querySelectorAll<HTMLElement>('.service-card')
-
-    gsap.set(cards, { opacity: 0, y: 60 })
-
-    const tween = gsap.to(cards, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      ease: 'power3.out',
-      stagger: 0.12,
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none none',
-      },
-    })
-
-    return () => {
-      tween.kill()
-      tween.scrollTrigger?.kill()
-    }
-  }, [])
-
   return (
     <section id="servicios" className="section-padding relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -112,10 +75,7 @@ export default function Services() {
         />
 
         {/* Bento Grid — 6-col asymmetric */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-6 md:gap-5 lg:gap-6"
-        >
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-6 md:gap-5 lg:gap-6">
           {services.map((service, i) => {
             const Icon = service.icon
             const isHero = i === 0
