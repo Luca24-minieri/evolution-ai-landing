@@ -162,7 +162,7 @@ export default function CtaBanner() {
           <Button
             variant="primary"
             size="lg"
-            href="#contacto"
+            href="/contacto"
           >
             <ArrowDown size={18} />
             Agenda una reunión

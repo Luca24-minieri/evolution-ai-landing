@@ -1,25 +1,23 @@
 import Hero from '@/components/sections/Hero'
 import SocialProof from '@/components/sections/SocialProof'
-import Services from '@/components/sections/Services'
-import Process from '@/components/sections/Process'
-import WhyUs from '@/components/sections/WhyUs'
+import ServicesPreview from '@/components/sections/ServicesPreview'
+import ProcessPreview from '@/components/sections/ProcessPreview'
+import AboutPreview from '@/components/sections/AboutPreview'
 import CtaBanner from '@/components/sections/CtaBanner'
-import About from '@/components/sections/About'
-import Faq from '@/components/sections/Faq'
-import Contact from '@/components/sections/Contact'
+import FaqPreview from '@/components/sections/FaqPreview'
+import ContactPreview from '@/components/sections/ContactPreview'
 
 export default function Home() {
   return (
     <>
       <Hero />
       <SocialProof />
-      <Services />
-      <Process />
-      <WhyUs />
+      <ServicesPreview />
+      <ProcessPreview />
+      <AboutPreview />
       <CtaBanner />
-      <About />
-      <Faq />
-      <Contact />
+      <FaqPreview />
+      <ContactPreview />
     </>
   )
 }

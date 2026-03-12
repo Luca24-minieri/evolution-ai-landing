@@ -329,10 +329,10 @@ export default function Hero() {
           }}
           className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4"
         >
-          <Button variant="primary" size="lg" href="#contacto" className="w-full sm:w-auto">
+          <Button variant="primary" size="lg" href="/contacto" className="w-full sm:w-auto">
             Comienza tu evolución
           </Button>
-          <Button variant="secondary" size="lg" href="#servicios" className="w-full sm:w-auto">
+          <Button variant="secondary" size="lg" href="/servicios" className="w-full sm:w-auto">
             Ver servicios
           </Button>
         </motion.div>
