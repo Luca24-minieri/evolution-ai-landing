@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
 /**
@@ -20,14 +20,9 @@ interface Particle {
 
 function ParticleCanvas({ onAssembled }: { onAssembled: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const callbackRef = useRef(onAssembled)
+  callbackRef.current = onAssembled
   const calledRef = useRef(false)
-
-  const handleAssembled = useCallback(() => {
-    if (!calledRef.current) {
-      calledRef.current = true
-      onAssembled()
-    }
-  }, [onAssembled])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -84,7 +79,10 @@ function ParticleCanvas({ onAssembled }: { onAssembled: () => void }) {
       // Notify content can appear once grid is assembled
       if (!notified && elapsed >= assembleDuration) {
         notified = true
-        handleAssembled()
+        if (!calledRef.current) {
+          calledRef.current = true
+          callbackRef.current()
+        }
       }
 
       for (const p of particles) {
@@ -164,7 +162,8 @@ function ParticleCanvas({ onAssembled }: { onAssembled: () => void }) {
 
     raf = requestAnimationFrame(draw)
     return () => cancelAnimationFrame(raf)
-  }, [handleAssembled])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <canvas
