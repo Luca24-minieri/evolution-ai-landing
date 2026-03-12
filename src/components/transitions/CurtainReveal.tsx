@@ -5,38 +5,17 @@ import { motion } from 'framer-motion'
 
 /**
  * Curtain Reveal — /nosotros page entrance
- * Desktop: two panels slide away revealing content.
- * Mobile: simple fade-in (curtain animation is too heavy for mobile GPUs).
+ * Two panels slide away from center, revealing content beneath.
+ * Panels are removed from DOM after animation completes.
  */
 
 export default function CurtainReveal({ children }: { children: ReactNode }) {
-  const [isMobile, setIsMobile] = useState(true)
   const [showCurtains, setShowCurtains] = useState(true)
 
   useEffect(() => {
-    const mobile = window.innerWidth < 768
-    setIsMobile(mobile)
-
-    if (!mobile) {
-      const timer = setTimeout(() => setShowCurtains(false), 900)
-      return () => clearTimeout(timer)
-    } else {
-      setShowCurtains(false)
-    }
+    const timer = setTimeout(() => setShowCurtains(false), 900)
+    return () => clearTimeout(timer)
   }, [])
-
-  // Mobile: simple fast fade
-  if (isMobile) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        {children}
-      </motion.div>
-    )
-  }
 
   return (
     <div className="relative">

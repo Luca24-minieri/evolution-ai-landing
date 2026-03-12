@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import SectionTitle from '@/components/ui/SectionTitle'
 import GlowCard from '@/components/ui/GlowCard'
@@ -63,6 +63,11 @@ const cardVariants = {
 export default function WhyUs() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   return (
     <section
@@ -121,6 +126,10 @@ export default function WhyUs() {
                     {stat.symbol ? (
                       <span className="text-3xl sm:text-5xl lg:text-7xl font-heading font-bold gradient-text leading-none">
                         {stat.symbol}
+                      </span>
+                    ) : isMobile ? (
+                      <span className="text-3xl font-heading font-bold gradient-text leading-none tabular-nums">
+                        {stat.prefix}{stat.value}{stat.suffix}
                       </span>
                     ) : (
                       <AnimatedCounter
