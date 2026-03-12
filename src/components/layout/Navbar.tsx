@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
+import LogoIcon from '@/components/ui/LogoIcon'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { cn, NAV_LINKS } from '@/lib/utils'
@@ -93,19 +93,12 @@ export default function Navbar() {
             isScrolled && 'bg-[#0a0a0f]/90 shadow-lg shadow-black/20'
           )}
         >
-          {/* Logo — icon only via cropped container */}
+          {/* Logo — chevron icon only */}
           <Link
             href="/"
-            className="group relative flex-shrink-0 h-8 w-8 overflow-hidden rounded-full transition-opacity duration-300 hover:opacity-80"
+            className="group flex-shrink-0 transition-opacity duration-300 hover:opacity-80"
           >
-            <Image
-              src="/logo.png"
-              alt="Evolution.AI"
-              width={200}
-              height={56}
-              className="h-8 w-auto object-cover object-top"
-              priority
-            />
+            <LogoIcon className="h-9 w-9" />
           </Link>
 
           {/* Desktop links — centered */}

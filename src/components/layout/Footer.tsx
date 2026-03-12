@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { NAV_LINKS } from '@/lib/utils'
+import LogoIcon from '@/components/ui/LogoIcon'
 
 const serviceLinks = [
   { label: 'Agentes AI', href: '/servicios' },
@@ -17,15 +17,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 transition-opacity duration-300 hover:opacity-80">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl">
-                <Image
-                  src="/logo.png"
-                  alt="Evolution.AI"
-                  width={200}
-                  height={200}
-                  className="h-10 w-auto object-cover object-top"
-                />
-              </div>
+              <LogoIcon className="h-11 w-11" />
               <span className="font-heading text-lg font-bold text-foreground">
                 Evolution<span className="text-primary-400">.AI</span>
               </span>
