@@ -58,14 +58,17 @@ const services = [
   },
 ]
 
-/** Grid placement per card index for the 6-col bento layout */
+/** Grid placement per card index for bento layout at each breakpoint
+ *  Mobile:  2-col grid with asymmetric spans
+ *  Desktop: 6-col grid with full bento layout
+ */
 const gridSpans: Record<number, string> = {
-  0: 'md:col-span-4 md:row-span-2',
-  1: 'md:col-span-2 md:row-span-1',
-  2: 'md:col-span-2 md:row-span-1',
-  3: 'md:col-span-3 md:row-span-1',
-  4: 'md:col-span-3 md:row-span-1',
-  5: 'md:col-span-6 md:row-span-1',
+  0: 'col-span-2 sm:col-span-2 md:col-span-4 md:row-span-2',
+  1: 'col-span-1 sm:col-span-1 md:col-span-2 md:row-span-1',
+  2: 'col-span-1 sm:col-span-1 md:col-span-2 md:row-span-1',
+  3: 'col-span-1 sm:col-span-1 md:col-span-3 md:row-span-1',
+  4: 'col-span-1 sm:col-span-1 md:col-span-3 md:row-span-1',
+  5: 'col-span-2 sm:col-span-2 md:col-span-6 md:row-span-1',
 }
 
 export default function Services() {
@@ -111,7 +114,7 @@ export default function Services() {
         {/* Bento Grid — 6-col asymmetric */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-6 md:gap-5 lg:gap-6"
+          className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-6 md:gap-5 lg:gap-6"
         >
           {services.map((service, i) => {
             const Icon = service.icon
