@@ -84,7 +84,7 @@ export default function Navbar() {
     <>
       {/* Floating pill navbar */}
       <header
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-3xl"
       >
         <nav
           className={cn(

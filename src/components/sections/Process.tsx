@@ -118,7 +118,7 @@ export default function Process() {
           </div>
 
           {/* Steps grid — 4 columns on desktop */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6">
             {steps.map((step, i) => {
               const Icon = step.icon
               return (

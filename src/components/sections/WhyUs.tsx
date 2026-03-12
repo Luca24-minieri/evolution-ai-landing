@@ -80,7 +80,7 @@ export default function WhyUs() {
             backgroundSize: '40px 40px',
           }}
         />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary-500/[0.04] blur-[120px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(800px,200vw)] h-[min(800px,200vw)] rounded-full bg-primary-500/[0.04] blur-[120px]" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-primary-700/[0.06] blur-[100px]" />
       </div>
 

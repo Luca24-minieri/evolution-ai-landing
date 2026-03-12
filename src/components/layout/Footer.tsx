@@ -38,7 +38,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-muted transition-colors duration-300 hover:text-primary-400"
+                    className="inline-block py-1 font-body text-sm text-muted transition-colors duration-300 hover:text-primary-400"
                   >
                     {link.label}
                   </Link>
@@ -57,7 +57,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-muted transition-colors duration-300 hover:text-primary-400"
+                    className="inline-block py-1 font-body text-sm text-muted transition-colors duration-300 hover:text-primary-400"
                   >
                     {link.label}
                   </Link>

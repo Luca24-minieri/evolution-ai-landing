@@ -90,7 +90,7 @@ function FaqAccordionItem({
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className={cn(
-            'flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center border transition-colors duration-300',
+            'flex-shrink-0 w-11 h-11 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border transition-colors duration-300',
             isOpen
               ? 'bg-primary-500/15 border-primary-500/30 text-primary-400'
               : 'bg-white/[0.03] border-white/[0.08] text-muted group-hover:border-primary-500/20 group-hover:text-primary-400'

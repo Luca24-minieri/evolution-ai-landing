@@ -68,7 +68,7 @@ export default function Contact() {
   }
 
   const inputClasses = cn(
-    'w-full bg-transparent border border-white/[0.08] rounded-xl px-5 py-3.5',
+    'w-full bg-transparent border border-white/[0.08] rounded-xl px-4 py-3 sm:px-5 sm:py-3.5',
     'text-foreground placeholder:text-muted text-base',
     'transition-all duration-300',
     'focus:outline-none focus:border-primary-500/50 focus:shadow-[0_0_20px_rgba(0,229,255,0.1)]',
@@ -223,7 +223,7 @@ export default function Contact() {
             </div>
 
             {/* Response time note */}
-            <div className="mt-10 p-5 rounded-xl bg-primary-500/[0.05] border border-primary-500/10">
+            <div className="mt-10 p-4 sm:p-5 rounded-xl bg-primary-500/[0.05] border border-primary-500/10">
               <p className="text-muted-light text-base leading-relaxed">
                 <span className="text-primary-400 font-medium">⚡</span>{' '}
                 Responderemos en menos de 24 horas. Agenda una llamada
